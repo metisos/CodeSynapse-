@@ -1,0 +1,61 @@
+{
+  "name": "codesynapse",
+  "version": "1.0.0",
+  "description": "Real-time codebase visualization tool with neural network-style 3D graph. Watch your code evolve as AI agents work.",
+  "main": "server/dist/index.js",
+  "bin": {
+    "codesynapse": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "server/dist/",
+    "client/build/",
+    "README.md",
+    "LICENSE"
+  ],
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --workspace=server && npm install --workspace=client",
+    "dev": "npm run build --workspace=client && npm run dev --workspace=server",
+    "build": "npm run build --workspace=client && npm run build --workspace=server",
+    "start": "node server/dist/index.js",
+    "watch": "npm run dev",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "visualization",
+    "codebase",
+    "3d",
+    "graph",
+    "real-time",
+    "ai-agent",
+    "development-tools",
+    "code-visualization",
+    "neural-network",
+    "dependency-graph",
+    "live-coding",
+    "developer-tools"
+  ],
+  "author": "Christian Johnson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/codesynapse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/codesynapse/issues"
+  },
+  "homepage": "https://github.com/yourusername/codesynapse#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "open": "^11.0.0"
+  }
+}

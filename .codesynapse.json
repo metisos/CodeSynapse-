@@ -1,0 +1,23 @@
+{
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.next/**",
+    "**/coverage/**",
+    "**/.cache/**",
+    "**/tmp/**"
+  ],
+  "colors": {
+    "javascript": "#f1e05a",
+    "typescript": "#2b7489",
+    "json": "#00d084",
+    "style": "#563d7c",
+    "markup": "#e34c26",
+    "markdown": "#083fa1",
+    "config": "#6e4a7e",
+    "text": "#cccccc",
+    "other": "#888888"
+  }
+}
