@@ -39,7 +39,8 @@ URL: http://localhost:${port}
 const env = {
   ...process.env,
   PORT: port,
-  NODE_ENV: 'production'
+  NODE_ENV: 'production',
+  USER_CWD: cwd  // Pass the actual working directory where user ran the command
 };
 
 // Start the server

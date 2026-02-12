@@ -36,11 +36,21 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: Date.now() });
 });
 
-// Get current working directory (parent of server folder)
+// Get current working directory (use USER_CWD from CLI or fallback to process.cwd)
 app.get('/api/cwd', (req, res) => {
-  const cwd = process.cwd();
+  // Prefer USER_CWD from CLI (where user actually ran the command)
+  let projectRoot = process.env.USER_CWD || process.cwd();
+
   // If we're in the server directory, go up one level to the project root
-  const projectRoot = cwd.endsWith('/server') ? path.dirname(cwd) : cwd;
+  if (projectRoot.endsWith('/server')) {
+    projectRoot = path.dirname(projectRoot);
+  }
+
+  // If we're inside node_modules (installed package), don't use that directory
+  if (projectRoot.includes('/node_modules/')) {
+    projectRoot = process.env.USER_CWD || process.cwd().split('/node_modules/')[0];
+  }
+
   res.json({ cwd: projectRoot });
 });
 
