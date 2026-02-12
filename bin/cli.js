@@ -4,6 +4,15 @@ const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
+// Import open package dynamically to handle cases where it might not be installed
+let open;
+try {
+  open = require('open');
+} catch (err) {
+  // open package not available, will skip browser opening
+  open = null;
+}
+
 const args = process.argv.slice(2);
 const cwd = process.cwd();
 
@@ -51,13 +60,14 @@ const server = spawn('node', [serverPath], {
 });
 
 // Open browser after a short delay
-if (openBrowser) {
+if (openBrowser && open) {
   setTimeout(() => {
-    const open = require('open');
     open(`http://localhost:${port}`).catch(() => {
       console.log('\nOpen your browser and navigate to:', `http://localhost:${port}`);
     });
   }, 2000);
+} else if (openBrowser && !open) {
+  console.log('\nOpen your browser and navigate to:', `http://localhost:${port}`);
 }
 
 // Handle cleanup

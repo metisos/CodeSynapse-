@@ -1,6 +1,6 @@
 {
   "name": "codesynapse",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Real-time codebase visualization tool with neural network-style 3D graph. Watch your code evolve as AI agents work.",
   "main": "server/dist/index.js",
   "bin": {
