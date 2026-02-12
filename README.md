@@ -1,4 +1,4 @@
-# CodeSynapse 🧠
+# CodeSynapse
 
 > **Real-time codebase visualization that looks like a living neural network**
 >
@@ -15,15 +15,15 @@
 
 ## Features
 
-- 🌐 **3D Neural Network Visualization** - Files as neurons, dependencies as synapses
-- ⚡ **Real-time Updates** - Watch changes happen live as you code
-- 🔗 **Dependency Mapping** - Automatically parse and visualize import/require relationships
-- 📊 **Git Diff Integration** - Click any file to see code changes
-- 🎨 **Beautiful Effects** - Glow effects, pulse animations, and particle flows
-- 🚀 **High Performance** - Smooth 60fps visualization even with large codebases
-- 🎯 **AI Agent Friendly** - Perfect for watching AI agents work on your code
+- **3D Neural Network Visualization** - Files as neurons, dependencies as synapses
+- **Real-time Updates** - Watch changes happen live as you code
+- **Dependency Mapping** - Automatically parse and visualize import/require relationships
+- **Git Diff Integration** - Click any file to see code changes
+- **Beautiful Effects** - Glow effects, pulse animations, and particle flows
+- **High Performance** - Smooth 60fps visualization even with large codebases
+- **AI Agent Friendly** - Perfect for watching AI agents work on your code
 
-## 🎬 Demo
+## Demo
 
 Watch your codebase come alive:
 
@@ -34,7 +34,7 @@ Watch your codebase come alive:
 5. Click any node to see the git diff in a side panel
 6. Watch the neural network grow as you add more code
 
-## 📦 Installation
+## Installation
 
 ### Global Installation (Recommended)
 
@@ -48,7 +48,7 @@ npm install -g codesynapse
 npm install --save-dev codesynapse
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Quick Start
 
@@ -169,7 +169,7 @@ Nodes scale based on:
 - **Glow aura**: All nodes have a subtle glow effect
 - **Connection highlighting**: Hover to see connected files
 
-## 💡 Use Cases
+## Use Cases
 
 ### 1. Understanding Codebases
 Quickly visualize the structure and dependencies of unfamiliar projects.
@@ -243,17 +243,17 @@ Try adjusting physics settings or filtering file types in the configuration.
 ### Connection issues
 Make sure both server (3001) and client (3000) ports are available.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📬 Contact
+## Contact
 
 **Christian Johnson**
 Email: [cjohnson@metisos.co](mailto:cjohnson@metisos.co)
 GitHub: [@metisos](https://github.com/metisos)
 
-## 📄 License
+## License
 
 MIT License - feel free to use this in your own projects!
 
