@@ -19,7 +19,7 @@ const io = new Server(httpServer, {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3004;
 
 // Middleware
 app.use(cors());
@@ -315,11 +315,23 @@ app.get('*', (req, res) => {
   }
 });
 
-// Start server
-httpServer.listen(PORT, () => {
-  console.log(`
+// Start server with port conflict handling
+const startServer = (port: number) => {
+  httpServer.listen(port, () => {
+    console.log(`
 CodeSynapse Server Running
-Port: ${PORT}
-URL: http://localhost:${PORT}
+Port: ${port}
+URL: http://localhost:${port}
   `);
-});
+  }).on('error', (err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is in use, trying ${port + 1}...`);
+      startServer(port + 1);
+    } else {
+      console.error('Server error:', err);
+      process.exit(1);
+    }
+  });
+};
+
+startServer(Number(PORT));

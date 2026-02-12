@@ -18,7 +18,7 @@ if (!fs.existsSync(serverPath)) {
 }
 
 // Parse command line arguments
-const port = args.includes('--port') ? args[args.indexOf('--port') + 1] : '3000';
+const port = args.includes('--port') ? args[args.indexOf('--port') + 1] : '3004';
 const openBrowser = !args.includes('--no-open');
 
 console.log(`

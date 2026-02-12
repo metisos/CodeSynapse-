@@ -9,6 +9,8 @@ export interface Theme {
   accent: string;
   accentText: string;
   error: string;
+  // Test comment to trigger real-time update
+  // Adding another comment to see diff highlighting
   node: {
     javascript: string;
     typescript: string;

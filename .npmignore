@@ -1,0 +1,45 @@
+# Source files (only ship built files)
+client/src/
+client/public/
+client/tsconfig.json
+client/package.json
+server/src/
+server/tsconfig.json
+server/package.json
+
+# Development files
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+.DS_Store
+
+# Build artifacts that aren't needed
+client/node_modules/
+server/node_modules/
+node_modules/
+
+# Testing
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+coverage/
+
+# Documentation that's not needed
+DEMO.md
+QUICKSTART.md
+.codesynapse.json
+.claude/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Lock files (npm will generate its own)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

@@ -1,6 +1,10 @@
-# CodeSynapse
+# CodeSynapse 🧠
 
-> Real-time codebase visualization with a neural network-style 3D graph. Watch your code evolve as you or AI agents work on it.
+> **Real-time codebase visualization that looks like a living neural network**
+>
+> Watch your code evolve in 3D as files light up like neurons firing. Perfect for understanding codebases and monitoring AI agents at work.
+
+![CodeSynapse Visualization](https://raw.githubusercontent.com/metisos/CodeSynapse-/main/docs/screenshot.png)
 
 <div align="center">
 
@@ -30,7 +34,7 @@ Watch your codebase come alive:
 5. Click any node to see the git diff in a side panel
 6. Watch the neural network grow as you add more code
 
-## Installation
+## 📦 Installation
 
 ### Global Installation (Recommended)
 
@@ -44,7 +48,7 @@ npm install -g codesynapse
 npm install --save-dev codesynapse
 ```
 
-## Usage
+## 🚀 Usage
 
 ### Quick Start
 
@@ -55,9 +59,10 @@ codesynapse
 ```
 
 This will:
-1. Start the visualization server on `http://localhost:3000`
+1. Start the visualization server on `http://localhost:3004`
 2. Automatically open your browser
 3. Begin watching your project directory
+4. If port 3004 is in use, it will automatically try the next available port
 
 ### Command Line Options
 
@@ -65,7 +70,7 @@ This will:
 codesynapse [options]
 
 Options:
-  --port <port>     Specify port (default: 3000)
+  --port <port>     Specify port (default: 3004)
   --no-open         Don't automatically open browser
 ```
 
@@ -142,13 +147,13 @@ code-synapse/
 ### Node Colors
 
 Files are colored by type:
-- 🟡 JavaScript (.js, .jsx, .mjs, .cjs)
-- 🔵 TypeScript (.ts, .tsx)
-- 🟢 JSON (.json)
-- 🟣 Styles (.css, .scss, .sass, .less)
-- 🔴 Markup (.html)
-- 🔵 Markdown (.md)
-- ⚪ Other files
+- JavaScript (.js, .jsx, .mjs, .cjs) - Yellow
+- TypeScript (.ts, .tsx) - Blue
+- JSON (.json) - Green
+- Styles (.css, .scss, .sass, .less) - Purple
+- Markup (.html) - Red
+- Markdown (.md) - Green
+- Other files - Gray
 
 ### Node Size
 
@@ -164,7 +169,7 @@ Nodes scale based on:
 - **Glow aura**: All nodes have a subtle glow effect
 - **Connection highlighting**: Hover to see connected files
 
-## 📊 Use Cases
+## 💡 Use Cases
 
 ### 1. Understanding Codebases
 Quickly visualize the structure and dependencies of unfamiliar projects.
@@ -240,9 +245,15 @@ Make sure both server (3001) and client (3000) ports are available.
 
 ## 🤝 Contributing
 
-Contributions welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📝 License
+## 📬 Contact
+
+**Christian Johnson**
+Email: [cjohnson@metisos.co](mailto:cjohnson@metisos.co)
+GitHub: [@metisos](https://github.com/metisos)
+
+## 📄 License
 
 MIT License - feel free to use this in your own projects!
 
@@ -266,4 +277,4 @@ Built with:
 
 ---
 
-**Made with ❤️ for developers who love beautiful visualizations**
+Made for developers who love beautiful visualizations

@@ -75,14 +75,64 @@ const Graph3D: React.FC<Graph3DProps> = ({ data, onNodeClick, theme }) => {
     };
   }, [data]);
 
-  // Link appearance - make connections more visible
-  const linkColor = () => theme.link;
-  const linkWidth = () => 1.5;
+  // Dynamic link appearance - connections light up when nodes fire
+  const linkColor = (link: any) => {
+    const now = Date.now();
+    const sourceNode = link.source;
+    const targetNode = link.target;
 
-  // Particle animation along links - more particles for visibility
-  const linkDirectionalParticles = () => 3;
+    if (sourceNode && targetNode) {
+      const sourceTimeSinceChange = now - (sourceNode.lastModified || 0);
+      const targetTimeSinceChange = now - (targetNode.lastModified || 0);
+
+      // Light up connections when either node is active
+      if (sourceTimeSinceChange < 5000 || targetTimeSinceChange < 5000) {
+        return theme.accent; // Bright green synaptic firing
+      }
+    }
+
+    return theme.link; // Normal dim connection
+  };
+
+  const linkWidth = (link: any) => {
+    const now = Date.now();
+    const sourceNode = link.source;
+    const targetNode = link.target;
+
+    if (sourceNode && targetNode) {
+      const sourceTimeSinceChange = now - (sourceNode.lastModified || 0);
+      const targetTimeSinceChange = now - (targetNode.lastModified || 0);
+
+      // Thicken connections during neural firing
+      if (sourceTimeSinceChange < 5000 || targetTimeSinceChange < 5000) {
+        return 3; // Thick synaptic connection
+      }
+    }
+
+    return 1.5; // Normal width
+  };
+
+  // More particles when neurons fire
+  const linkDirectionalParticles = (link: any) => {
+    const now = Date.now();
+    const sourceNode = link.source;
+    const targetNode = link.target;
+
+    if (sourceNode && targetNode) {
+      const sourceTimeSinceChange = now - (sourceNode.lastModified || 0);
+      const targetTimeSinceChange = now - (targetNode.lastModified || 0);
+
+      // Burst of particles during firing
+      if (sourceTimeSinceChange < 5000 || targetTimeSinceChange < 5000) {
+        return 8; // Intense synaptic activity
+      }
+    }
+
+    return 3; // Normal particle flow
+  };
+
   const linkDirectionalParticleWidth = () => 2.5;
-  const linkDirectionalParticleSpeed = () => 0.008;
+  const linkDirectionalParticleSpeed = () => 0.012; // Faster for more dynamic effect
   const linkDirectionalParticleColor = () => theme.accent;
 
   // Camera settings and force configuration
@@ -114,12 +164,20 @@ const Graph3D: React.FC<Graph3DProps> = ({ data, onNodeClick, theme }) => {
     }
   }, []);
 
-  // Animate recently changed nodes - both pulse and color updates
+  // Track previous node count for detecting new files
+  const prevNodeCountRef = useRef(data.nodes.length);
+
+  // Animate nodes with beautiful neuron-like effects
   useEffect(() => {
     if (!fgRef.current) return;
 
     const scene = fgRef.current.scene();
     if (!scene) return;
+
+    // Detect new files (neuron birth animation)
+    const currentNodeCount = data.nodes.length;
+    const newNodesAdded = currentNodeCount > prevNodeCountRef.current;
+    prevNodeCountRef.current = currentNodeCount;
 
     const animate = () => {
       const now = Date.now();
@@ -127,13 +185,66 @@ const Graph3D: React.FC<Graph3DProps> = ({ data, onNodeClick, theme }) => {
       scene.children.forEach((obj: any) => {
         if (obj.__data && obj.__data.lastModified) {
           const timeSinceChange = now - obj.__data.lastModified;
+          const nodeAge = now - (obj.__data.createdAt || obj.__data.lastModified);
 
-          // Pulse effect for very recent changes (0-5 seconds)
-          if (timeSinceChange < 5000) {
-            const pulse = Math.sin(now / 200) * 0.3 + 1;
+          // NEW FILE BURST ANIMATION (0-3 seconds after creation)
+          if (nodeAge < 3000) {
+            // Explosive burst - start large and shrink in
+            const burstProgress = nodeAge / 3000;
+            const burstScale = 3 - (2 * burstProgress); // 3x -> 1x
+            const spinSpeed = (1 - burstProgress) * 0.02;
+
+            obj.scale.set(burstScale, burstScale, burstScale);
+            obj.rotation.y += spinSpeed;
+            obj.rotation.x += spinSpeed * 0.5;
+
+            // Intense glow during burst
+            if (obj.children && obj.children[0]) {
+              const glowMaterial = obj.children[0].material;
+              if (glowMaterial) {
+                glowMaterial.opacity = 0.9 * (1 - burstProgress);
+              }
+            }
+          }
+          // MODIFICATION PULSE (files that changed after creation)
+          else if (timeSinceChange < 5000) {
+            // Synaptic firing - rapid pulse
+            const pulse = Math.sin(now / 150) * 0.4 + 1.2;
             obj.scale.set(pulse, pulse, pulse);
-          } else {
+
+            // Slight rotation during firing
+            obj.rotation.z += 0.01;
+
+            // Brighten glow during firing
+            if (obj.children && obj.children[0]) {
+              const glowMaterial = obj.children[0].material;
+              if (glowMaterial) {
+                glowMaterial.opacity = 0.7;
+              }
+            }
+          }
+          // COOLING DOWN PHASE
+          else if (timeSinceChange < 30000) {
+            // Gentle breathing
+            const breath = Math.sin(now / 1000) * 0.1 + 1;
+            obj.scale.set(breath, breath, breath);
+
+            if (obj.children && obj.children[0]) {
+              const glowMaterial = obj.children[0].material;
+              if (glowMaterial) {
+                glowMaterial.opacity = 0.5;
+              }
+            }
+          }
+          else {
+            // Back to normal
             obj.scale.set(1, 1, 1);
+            if (obj.children && obj.children[0]) {
+              const glowMaterial = obj.children[0].material;
+              if (glowMaterial) {
+                glowMaterial.opacity = 0.5;
+              }
+            }
           }
 
           // Update color based on time since change (0-60 seconds)

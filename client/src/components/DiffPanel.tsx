@@ -93,7 +93,29 @@ const DiffPanel: React.FC<DiffPanelProps> = ({ diffData, onClose, theme }) => {
               {diffData.content}
             </SyntaxHighlighter>
           ) : activeTab === 'diff' ? (
-            <pre style={{ ...styles.diffText, color: theme.text.primary }}>{diffData.diff}</pre>
+            <div style={styles.diffContainer}>
+              {diffData.diff.split('\n').map((line, idx) => {
+                let lineStyle = { ...styles.diffLine };
+                let lineColor = theme.text.primary;
+
+                if (line.startsWith('+') && !line.startsWith('+++')) {
+                  lineStyle = { ...lineStyle, ...styles.diffLineAdded };
+                  lineColor = '#22c55e'; // Green for additions
+                } else if (line.startsWith('-') && !line.startsWith('---')) {
+                  lineStyle = { ...lineStyle, ...styles.diffLineDeleted };
+                  lineColor = '#ef4444'; // Red for deletions
+                } else if (line.startsWith('@@')) {
+                  lineColor = theme.accent; // Highlight line numbers
+                  lineStyle = { ...lineStyle, fontWeight: 600 };
+                }
+
+                return (
+                  <div key={idx} style={{ ...lineStyle, color: lineColor }}>
+                    {line || ' '}
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             <div style={{ ...styles.emptyState, color: theme.text.secondary }}>
               No content available
@@ -184,6 +206,25 @@ const styles: { [key: string]: React.CSSProperties } = {
     flex: 1,
     overflow: 'auto',
     padding: 0
+  },
+  diffContainer: {
+    padding: '16px 0',
+    fontSize: '13px',
+    lineHeight: '1.6',
+    fontFamily: 'Monaco, Consolas, "Courier New", monospace'
+  },
+  diffLine: {
+    padding: '2px 20px',
+    whiteSpace: 'pre-wrap',
+    wordBreak: 'break-word'
+  },
+  diffLineAdded: {
+    backgroundColor: 'rgba(34, 197, 94, 0.15)', // Light green background
+    borderLeft: '3px solid #22c55e'
+  },
+  diffLineDeleted: {
+    backgroundColor: 'rgba(239, 68, 68, 0.15)', // Light red background
+    borderLeft: '3px solid #ef4444'
   },
   diffText: {
     margin: 0,

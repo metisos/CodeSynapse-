@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.23fcdbf2.css",
+    "main.js": "/static/js/main.5c90edac.js",
+    "static/media/ngraph.events.cjs": "/static/media/ngraph.events.d3dfed5ea2f996b98f21.cjs",
+    "index.html": "/index.html",
+    "main.23fcdbf2.css.map": "/static/css/main.23fcdbf2.css.map",
+    "main.5c90edac.js.map": "/static/js/main.5c90edac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.23fcdbf2.css",
+    "static/js/main.5c90edac.js"
+  ]
+}
